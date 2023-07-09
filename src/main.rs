@@ -5,7 +5,9 @@ const STARTING_FUNDS: f64 = 500.;
 const STARTING_BET: f64 = 5.;
 const ODDS: f64 = 2.;
 const WINRATE: f64 = 0.5;
-const TIMESTEP: f64 = 0.;
+const TIMESTEP: f64 = 0.5;
+
+// TODO: Have X players make Y bets each and display statistics
 
 fn main() {
     let mut rng = thread_rng();
