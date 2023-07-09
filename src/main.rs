@@ -1,18 +1,18 @@
 use rand::*;
 use std::{thread::sleep, time::Duration};
 
-const STARTING_FUNDS: u32 = 500;
-const STARTING_BET: u32 = 5;
-const ODDS: u32 = 2;
+const STARTING_FUNDS: f64 = 500.;
+const STARTING_BET: f64 = 5.;
+const ODDS: f64 = 2.;
 const WINRATE: f64 = 0.5;
-const TIMESTEP: f32 = 0.;
+const TIMESTEP: f64 = 0.;
 
 fn main() {
     let mut rng = thread_rng();
     let mut funds = STARTING_FUNDS;
     let mut bet = STARTING_BET;
 
-    while funds > 0 {
+    while funds > 0. {
         println!(
             "current funds: {}\nbetting next: {}\nfunds gain if win: {}\n",
             funds,
@@ -20,7 +20,7 @@ fn main() {
             bet * ODDS
         );
 
-        sleep(Duration::from_secs_f32(TIMESTEP));
+        sleep(Duration::from_secs_f64(TIMESTEP));
 
         if rng.gen_bool(WINRATE) {
             funds += bet * ODDS;
@@ -32,6 +32,10 @@ fn main() {
             println!("LOST\n");
         }
 
-        sleep(Duration::from_secs_f32(TIMESTEP));
+        bet = bet.min(funds);
+
+        sleep(Duration::from_secs_f64(TIMESTEP));
     }
+
+    println!("All funds are lost!");
 }
